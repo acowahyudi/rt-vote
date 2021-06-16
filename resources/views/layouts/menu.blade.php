@@ -22,12 +22,6 @@
     </a>
 </li>
 
-{{--<li class="nav-item">--}}
-{{--    <a href="{{ route('tingkatPendidikans.index') }}"--}}
-{{--       class="nav-link {{ Request::is('tingkatPendidikans*') ? 'active' : '' }}"><i class="fa fa-graduation-cap"></i> <p>Tingkat Pendidikan</p>--}}
-{{--    </a>--}}
-{{--</li>--}}
-
 <li class="nav-item">
     <a href="{{ route('hasilVotings.index') }}"
        class="nav-link {{ Request::is('hasilVotings*') ? 'active' : '' }}"><i class="fa fa-chart-bar"></i> <p>Hasil Voting</p>

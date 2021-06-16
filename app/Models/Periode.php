@@ -26,7 +26,7 @@ class Periode extends Model
     use HasFactory;
 
     public $table = 'periode';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -36,8 +36,6 @@ class Periode extends Model
 
 
     public $fillable = [
-        'tahun_mulai',
-        'tahun_selesai',
         'mulai_vote',
         'selesai_vote',
         'keterangan'
@@ -50,8 +48,6 @@ class Periode extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'tahun_mulai' => 'date',
-        'tahun_selesai' => 'date',
         'mulai_vote' => 'date',
         'selesai_vote' => 'date',
         'keterangan' => 'string'
@@ -63,8 +59,6 @@ class Periode extends Model
      * @var array
      */
     public static $rules = [
-        'tahun_mulai' => 'nullable',
-        'tahun_selesai' => 'nullable',
         'mulai_vote' => 'nullable',
         'selesai_vote' => 'nullable',
         'keterangan' => 'nullable|string|max:255',

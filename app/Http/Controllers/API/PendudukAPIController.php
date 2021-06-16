@@ -35,13 +35,9 @@ class PendudukAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $penduduks = $this->pendudukRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $penduduks = Penduduk::where('nik',$request->nik_email)->orWhere('email',$request->nik_email)->get()->first();
 
-        return $this->sendResponse(PendudukResource::collection($penduduks), 'Penduduks retrieved successfully');
+        return $this->sendResponse($penduduks, 'Penduduks retrieved successfully');
     }
 
     /**

@@ -38,10 +38,7 @@ class Penduduk extends Model
     public $fillable = [
         'nama',
         'nik',
-        'jenis_kelamin',
-        'tgl_lahir',
-        'tempat_lahir',
-        'agama'
+        'email'
     ];
 
     /**
@@ -53,10 +50,7 @@ class Penduduk extends Model
         'id' => 'integer',
         'nama' => 'string',
         'nik' => 'string',
-        'jenis_kelamin' => 'string',
-        'tgl_lahir' => 'date',
-        'tempat_lahir' => 'string',
-        'agama' => 'string'
+        'email' => 'string'
     ];
 
     /**
@@ -67,10 +61,7 @@ class Penduduk extends Model
     public static $rules = [
         'nama' => 'nullable|string|max:255',
         'nik' => 'nullable|string|max:255',
-        'jenis_kelamin' => 'nullable|string|max:1',
-        'tgl_lahir' => 'nullable',
-        'tempat_lahir' => 'nullable|string|max:255',
-        'agama' => 'nullable|string|max:255',
+        'email' => 'nullable|string|max:255',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'

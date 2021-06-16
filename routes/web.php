@@ -18,20 +18,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group(['middleware' => ['auth']], function (){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('penduduks', App\Http\Controllers\PendudukController::class);
 
+    Route::resource('periodes', App\Http\Controllers\PeriodeController::class);
 
-Route::resource('tingkatPendidikans', App\Http\Controllers\TingkatPendidikanController::class);
+    Route::resource('kandidats', App\Http\Controllers\KandidatController::class);
 
-Route::resource('penduduks', App\Http\Controllers\PendudukController::class);
+    Route::resource('hasilVotings', App\Http\Controllers\HasilVotingController::class);
+});
 
-Route::resource('periodes', App\Http\Controllers\PeriodeController::class);
-
-Route::resource('kandidats', App\Http\Controllers\KandidatController::class);
-
-Route::resource('hasilVotings', App\Http\Controllers\HasilVotingController::class);
-
-Route::resource('tingkatPendidikans', App\Http\Controllers\TingkatPendidikanController::class);
-
-Route::resource('hasilVotings', App\Http\Controllers\HasilVotingController::class);

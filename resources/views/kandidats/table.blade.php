@@ -18,10 +18,6 @@
                 </td>
                 <td style="white-space: nowrap">
                     <b>Nama :</b> {{ $kandidat->nama }}<br>
-                    <b>TTL :</b> {{ $kandidat->tempat_lahir }}, {{ $kandidat->tgl_lahir->format("d M Y") }}<br>
-                    <b>Jenis Kelamin :</b> {{ $kandidat->jenis_kelamin=="L"?"Laki - Laki":"Perempuan" }}<br>
-                    <b>Agama :</b> {{ $kandidat->agama }}<br>
-                    <b>Pendidikan :</b> {{ $kandidat->tingkatPendidikan->pendidikan }}<br>
                     <b>Periode :</b> {{$kandidat->periode->keterangan}}
                 </td>
 

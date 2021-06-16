@@ -3,8 +3,6 @@
         <thead>
             <tr>
                 <th>Periode</th>
-                <th>Periode Mulai</th>
-                <th>Periode Selesai</th>
                 <th>Mulai Vote</th>
                 <th>Selesai Vote</th>
                 <th colspan="3">Action</th>
@@ -14,8 +12,6 @@
         @foreach($periodes as $periode)
             <tr>
                 <td>{{ $periode->keterangan }}</td>
-                <td>{{ $periode->tahun_mulai->format("d M Y") }}</td>
-                <td>{{ $periode->tahun_selesai->format("d M Y") }}</td>
                 <td>{{ $periode->mulai_vote->format("d M Y") }}</td>
                 <td>{{ $periode->selesai_vote->format("d M Y") }}</td>
                 <td width="120">

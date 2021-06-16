@@ -45,7 +45,6 @@ class KandidatController extends AppBaseController
      */
     public function create()
     {
-        $pendidikan = TingkatPendidikan::pluck('pendidikan','id');
         $periode = Periode::pluck('keterangan','id');
         return view('kandidats.create',compact('pendidikan','periode'));
     }
@@ -110,7 +109,6 @@ class KandidatController extends AppBaseController
      */
     public function edit($id)
     {
-        $pendidikan = TingkatPendidikan::pluck('pendidikan','id');
         $periode = Periode::pluck('keterangan','id');
         $kandidat = $this->kandidatRepository->find($id);
 

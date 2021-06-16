@@ -4,9 +4,7 @@
             <tr>
                 <th>Nama</th>
                 <th>NIK</th>
-                <th>Jenis Kelamin</th>
-                <th>Tempat, Tanggal Lahir</th>
-                <th>Agama</th>
+                <th>Email</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -15,9 +13,7 @@
             <tr>
                 <td>{{ $penduduk->nama }}</td>
                 <td>{{ $penduduk->nik }}</td>
-                <td>{{ $penduduk->jenis_kelamin=="L"?"Laki - Laki":"Perempuan" }}</td>
-                <td>{{ $penduduk->tempat_lahir }}, {{ $penduduk->tgl_lahir->format("d M Y") }}</td>
-                <td>{{ $penduduk->agama }}</td>
+                <td>{{ $penduduk->email }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['penduduks.destroy', $penduduk->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

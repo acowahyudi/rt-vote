@@ -50,8 +50,8 @@ class KandidatAPIController extends AppBaseController
             if ($voteAktif>0){
                 return $this->sendError('Anda sudah pernah vote pada pemilihan periode ini',422);
             }else{
-                $kandidats = Kandidat::where('periode_id',$periodeAktif->id)->get();
-                return $this->sendResponse(KandidatResource::collection($kandidats), 'Kandidats retrieved successfully');
+                $kandidats = Kandidat::where('periode_id',$periodeAktif->id)->with('periode')->get();
+                return $this->sendResponse($kandidats->toArray(), 'Kandidats retrieved successfully');
             }
         }else{
             return $this->sendError('Belum ada pemilihan pada periode ini',404);

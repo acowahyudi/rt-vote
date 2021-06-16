@@ -27,10 +27,6 @@ Route::group(['middleware' => 'api'], function ($router) {
 
 });
 
-
-
-Route::resource('tingkat_pendidikans', App\Http\Controllers\API\TingkatPendidikanAPIController::class);
-
 Route::resource('penduduks', App\Http\Controllers\API\PendudukAPIController::class);
 
 Route::resource('periodes', App\Http\Controllers\API\PeriodeAPIController::class);

@@ -45,13 +45,8 @@ class Kandidat extends Model
     public $fillable = [
         'no_calon',
         'nama',
-        'tgl_lahir',
-        'tempat_lahir',
-        'jenis_kelamin',
-        'agama',
         'foto',
         'visi',
-        'tingkat_pendidikan_id',
         'periode_id'
     ];
 
@@ -64,13 +59,8 @@ class Kandidat extends Model
         'id' => 'integer',
         'no_calon' => 'integer',
         'nama' => 'string',
-        'tgl_lahir' => 'date',
-        'tempat_lahir' => 'string',
-        'jenis_kelamin' => 'string',
-        'agama' => 'string',
         'foto' => 'string',
         'visi' => 'string',
-        'tingkat_pendidikan_id' => 'integer',
         'periode_id' => 'integer'
     ];
 
@@ -82,12 +72,7 @@ class Kandidat extends Model
     public static $rules = [
         'no_calon' => 'nullable|integer',
         'nama' => 'nullable|string|max:255',
-        'tgl_lahir' => 'nullable',
-        'tempat_lahir' => 'nullable|string|max:255',
-        'jenis_kelamin' => 'nullable|string|max:1',
-        'agama' => 'nullable|string|max:255',
         'visi' => 'nullable|string',
-        'tingkat_pendidikan_id' => 'required|integer',
         'periode_id' => 'required|integer',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
@@ -100,14 +85,6 @@ class Kandidat extends Model
     public function periode()
     {
         return $this->belongsTo(\App\Models\Periode::class, 'periode_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function tingkatPendidikan()
-    {
-        return $this->belongsTo(\App\Models\TingkatPendidikan::class, 'tingkat_pendidikan_id');
     }
 
     /**

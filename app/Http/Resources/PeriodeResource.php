@@ -16,8 +16,6 @@ class PeriodeResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'tahun_mulai' => $this->tahun_mulai,
-            'tahun_selesai' => $this->tahun_selesai,
             'mulai_vote' => $this->mulai_vote,
             'selesai_vote' => $this->selesai_vote,
             'keterangan' => $this->keterangan,

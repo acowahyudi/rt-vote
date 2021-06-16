@@ -11,7 +11,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <h4 class="text-white font-large-1 mb-2"><i class="fa fa-calendar"></i> Pemilihan Aktif</h4>
-                                        <h5 class="text-white">Periode : {{$endVote->tahun_mulai->format("Y")}} - {{$endVote->tahun_selesai->format("Y")}}</h5>
+                                        <h5 class="text-white">Periode : {{$endVote->keterangan}}</h5>
                                         <h5>Pemilihan Berakhir: {{$endVote->remainDay}} Hari lagi</h5>
                                 </div>
                             </div>

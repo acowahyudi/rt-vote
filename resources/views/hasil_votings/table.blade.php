@@ -11,7 +11,7 @@
         <tbody>
         @foreach($hasilVotings as $hasilVoting)
             <tr>
-                <td>{{ $hasilVoting->periode->tahun_mulai->format("Y") }} - {{ $hasilVoting->periode->tahun_selesai->format("Y") }}</td>
+                <td>{{ $hasilVoting->periode->keterangan }}</td>
             <td>{{ $hasilVoting->penduduk->nama }}</td>
             <td>{{ $hasilVoting->kandidat->nama }}</td>
                 <td width="120">
