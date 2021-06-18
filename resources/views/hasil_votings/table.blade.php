@@ -12,8 +12,8 @@
         @foreach($hasilVotings as $hasilVoting)
             <tr>
                 <td>{{ $hasilVoting->periode->keterangan }}</td>
-            <td>{{ $hasilVoting->penduduk->nama }}</td>
-            <td>{{ $hasilVoting->kandidat->nama }}</td>
+                <td>{{ $hasilVoting->penduduk->nama }}</td>
+                <td>{{ $hasilVoting->kandidat->penduduk->nama }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['hasilVotings.destroy', $hasilVoting->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

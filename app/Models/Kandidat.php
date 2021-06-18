@@ -40,11 +40,12 @@ class Kandidat extends Model
     protected $dates = ['deleted_at'];
     protected $appends = [
         'vote_count',
+        'vote_count_persentasi'
     ];
 
     public $fillable = [
         'no_calon',
-        'nama',
+        'penduduk_id',
         'foto',
         'visi',
         'periode_id'
@@ -58,7 +59,7 @@ class Kandidat extends Model
     protected $casts = [
         'id' => 'integer',
         'no_calon' => 'integer',
-        'nama' => 'string',
+        'penduduk_id' => 'integer',
         'foto' => 'string',
         'visi' => 'string',
         'periode_id' => 'integer'
@@ -71,7 +72,7 @@ class Kandidat extends Model
      */
     public static $rules = [
         'no_calon' => 'nullable|integer',
-        'nama' => 'nullable|string|max:255',
+        'penduduk_id' => 'required|integer',
         'visi' => 'nullable|string',
         'periode_id' => 'required|integer',
         'created_at' => 'nullable',
@@ -88,6 +89,14 @@ class Kandidat extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function penduduk()
+    {
+        return $this->belongsTo(\App\Models\Penduduk::class, 'penduduk_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function hasilVotings()
@@ -98,5 +107,13 @@ class Kandidat extends Model
     public function getVoteCountAttribute()
     {
         return $this->hasilVotings()->count();
+    }
+
+    public function getVoteCountPersentasiAttribute()
+    {
+        $nilai = $this->hasilVotings()->count();
+        $allVote = HasilVoting::where('periode_id',$this->periode_id)->get()->count();
+        $presentasi = number_format((($nilai*100)/$allVote),2);
+        return $presentasi;
     }
 }

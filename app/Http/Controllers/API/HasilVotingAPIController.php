@@ -5,7 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateHasilVotingAPIRequest;
 use App\Http\Requests\API\UpdateHasilVotingAPIRequest;
 use App\Models\HasilVoting;
+use App\Models\Kandidat;
+use App\Models\Periode;
 use App\Repositories\HasilVotingRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\HasilVotingResource;
@@ -31,17 +34,23 @@ class HasilVotingAPIController extends AppBaseController
      * GET|HEAD /hasilVotings
      *
      * @param Request $request
-     * @return Response
+     * @return bool
      */
     public function index(Request $request)
     {
-        $hasilVotings = $this->hasilVotingRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
-
-        return $this->sendResponse(HasilVotingResource::collection($hasilVotings), 'Hasil Votings retrieved successfully');
+        $periode = Periode::whereDate('selesai_vote','<',Carbon::now())->latest()->first();
+        if (!empty($periode) && $periode!=null)
+        {
+            $kandidatAktif = Kandidat::where('periode_id',$periode->id)->with('penduduk','periode')->get()->sortByDesc('vote_count');
+            return $this->sendResponse($kandidatAktif, 'Hasil Voting retrieved successfully');
+        }else{
+            $today = Carbon::now();
+            $endVote = Periode::whereDate('mulai_vote','<',Carbon::now()) ->whereDate('selesai_vote','>',Carbon::now())->get()->first();
+            $remainDay = $endVote->selesai_vote->diffInDays($today);
+            $periode['remain_day'] = $remainDay;
+            $periode['periode_voting'] = $endVote->keterangan;
+            return $this->sendResponse([$periode],'Voting masih berlangsung, tunggu hasil akhir setelah vote ditutup');
+        }
     }
 
     /**
@@ -55,6 +64,10 @@ class HasilVotingAPIController extends AppBaseController
     public function store(CreateHasilVotingAPIRequest $request)
     {
         $input = $request->all();
+        $cekPeriode = Periode::where('id',$input['periode_id'])->get()->first();
+        if ($cekPeriode->selesai_vote<Carbon::today()){
+            return $this->sendError('Voting telah ditutup');
+        }
 
         $hasilVoting = $this->hasilVotingRepository->create($input);
 

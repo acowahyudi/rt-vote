@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateKandidatRequest;
 use App\Http\Requests\UpdateKandidatRequest;
+use App\Models\Penduduk;
 use App\Models\Periode;
 use App\Models\TingkatPendidikan;
 use App\Repositories\KandidatRepository;
@@ -45,8 +46,9 @@ class KandidatController extends AppBaseController
      */
     public function create()
     {
+        $penduduk = Penduduk::pluck('nama','id');
         $periode = Periode::pluck('keterangan','id');
-        return view('kandidats.create',compact('pendidikan','periode'));
+        return view('kandidats.create',compact('penduduk','periode'));
     }
 
     /**
@@ -109,6 +111,7 @@ class KandidatController extends AppBaseController
      */
     public function edit($id)
     {
+        $penduduk = Penduduk::pluck('nama','id');
         $periode = Periode::pluck('keterangan','id');
         $kandidat = $this->kandidatRepository->find($id);
 
@@ -116,7 +119,7 @@ class KandidatController extends AppBaseController
             Flash::error('Kandidat not found');
             return redirect(route('kandidats.index'));
         }
-        return view('kandidats.edit',compact('periode','pendidikan'))->with('kandidat', $kandidat);
+        return view('kandidats.edit',compact('periode','penduduk'))->with('kandidat', $kandidat);
     }
 
     /**

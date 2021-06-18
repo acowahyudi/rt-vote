@@ -75,5 +75,11 @@ class Penduduk extends Model
         return $this->hasMany(\App\Models\HasilVoting::class, 'penduduk_id');
     }
 
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function kandidat()
+    {
+        return $this->hasMany(\App\Models\Kandidat::class, 'penduduk_id');
+    }
 }

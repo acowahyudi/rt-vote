@@ -38,11 +38,11 @@ class KandidatAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $periodeAktif = Periode::whereDate('mulai_vote','<',Carbon::now()) ->whereDate('selesai_vote','>',Carbon::now())->get()->first();
+        $periodeAktif = Periode::whereDate('mulai_vote','<',Carbon::now())
+            ->orWhereDate('selesai_vote','>',Carbon::now())
+            ->whereYear('mulai_vote','<',Carbon::today()->year)
+            ->get()->first();
         if (!empty($periodeAktif)){
-//            $today = Carbon::now();
-//            $remainDay = $periodeAktif->selesai_vote->diffInDays($today);
-
             //pengecekan apakah user sudah pernah voting atau belum
             $voteAktif = HasilVoting::where('penduduk_id',$request->penduduk_id)
                 ->where('periode_id',$periodeAktif->id)->get()->count();
@@ -50,7 +50,9 @@ class KandidatAPIController extends AppBaseController
             if ($voteAktif>0){
                 return $this->sendError('Anda sudah pernah vote pada pemilihan periode ini',422);
             }else{
-                $kandidats = Kandidat::where('periode_id',$periodeAktif->id)->with('periode')->get();
+                $kandidats = Kandidat::where('periode_id',$periodeAktif->id)
+                    ->where('penduduk_id','!=',$request->penduduk_id)
+                    ->with('periode','penduduk')->get();
                 return $this->sendResponse($kandidats->toArray(), 'Kandidats retrieved successfully');
             }
         }else{

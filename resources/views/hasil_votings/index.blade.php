@@ -7,12 +7,6 @@
                 <div class="col-sm-6">
                     <h1>Hasil Voting</h1>
                 </div>
-{{--                <div class="col-sm-6">--}}
-{{--                    <a class="btn btn-primary float-right"--}}
-{{--                       href="{{ route('hasilVotings.create') }}">--}}
-{{--                        Add New--}}
-{{--                    </a>--}}
-{{--                </div>--}}
             </div>
         </div>
     </section>
@@ -34,7 +28,7 @@
                                     <div class="row m-0">
                                         <img class="rounded" style="width: 50px;background-size: auto" src="{{asset($item->foto)}}">
                                         <div class="ml-2">
-                                            <h5 class="text-white font-large-1 mb-2"> {{$item->nama}}</h5>
+                                            <h5 class="text-white font-large-1 mb-2"> {{$item->penduduk->nama}}</h5>
                                             <h6 class="text-white">Jumlah Suara : <b>{{$item->vote_count}}</b></h6>
                                         </div>
                                     </div>

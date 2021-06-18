@@ -32,7 +32,10 @@ class HasilVotingController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $periode = Periode::whereDate('mulai_vote','<',Carbon::now()) ->whereDate('selesai_vote','>',Carbon::now())->get()->first();
+        $periode = Periode::whereDate('mulai_vote','<',Carbon::now())
+            ->orWhereDate('selesai_vote','>',Carbon::now())
+            ->whereYear('mulai_vote','<',Carbon::today()->year)
+            ->get()->first();
         $kandidatAktif = Kandidat::where('periode_id',$periode->id)->get();
 
         $hasilVotings = $this->hasilVotingRepository->all();
