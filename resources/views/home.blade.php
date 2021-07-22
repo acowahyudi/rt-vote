@@ -64,6 +64,7 @@
                             <div class="card shadow">
                                 <img src="{{asset($item->foto)}}" class="m-3 rounded rounded-1" alt="Kandidat Image">
                                 <div class="text-center bg-success font-weight-bold p-1">{{$item->user->name}}</div>
+                                <div class="text-center mt-2 font-weight-bold p-1">{{$item->visi}}</div>
                                 {!! Form::hidden('users_id', \Illuminate\Support\Facades\Auth::user()->id, null, ['class' => 'form-control']) !!}
                                 {!! Form::hidden('kandidat_id', $item->id, null, ['class' => 'form-control']) !!}
                                 {!! Form::hidden('periode_id', $endVote->id, null, ['class' => 'form-control']) !!}

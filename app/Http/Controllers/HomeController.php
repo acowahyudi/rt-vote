@@ -42,22 +42,26 @@ class HomeController extends Controller
                 $today = Carbon::now();
                 $remainDay = $endVote->selesai_vote->diffInDays($today);
                 $endVote['remainDay'] = $remainDay;
+
+                $penduduk = User::where('rukun_tetangga_id', Auth::user()->rukun_tetangga_id)->get();
+
+                $kandidat = Kandidat::whereHas('user',function ($q){
+                    $q->where('rukun_tetangga_id', Auth::user()->rukun_tetangga_id);
+                })->where('periode_id',$endVote->id)->get();
+                $idKandidat=[];
+                foreach ($kandidat as $item){
+                    array_push($idKandidat,$item->id);
+                }
+
+                $voting = HasilVoting::where('periode_id',$endVote->id)
+                    ->whereIn('kandidat_id',$idKandidat)
+                    ->get();
+            }else{
+                $penduduk = User::where('rukun_tetangga_id', Auth::user()->rukun_tetangga_id)->get();
+                $endVote=[];
+                $kandidat = [];
+                $voting = [];
             }
-
-            $penduduk = User::where('rukun_tetangga_id', Auth::user()->rukun_tetangga_id)->get();
-
-            $kandidat = Kandidat::whereHas('user',function ($q){
-                $q->where('rukun_tetangga_id', Auth::user()->rukun_tetangga_id);
-            })->where('periode_id',$endVote->id)->get();
-
-            $idKandidat=[];
-            foreach ($kandidat as $item){
-                array_push($idKandidat,$item->id);
-            }
-
-            $voting = HasilVoting::where('periode_id',$endVote->id)
-                ->whereIn('kandidat_id',$idKandidat)
-                ->get();
 
             return view('homeAdminRT',compact('kandidat','penduduk','voting','endVote'));
         }

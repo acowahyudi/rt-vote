@@ -21,7 +21,7 @@
         </a>
     </li>
 @endif
-@if(\Illuminate\Support\Facades\Auth::user()->roles_id!=2)
+@if(\Illuminate\Support\Facades\Auth::user()->roles_id==3)
     <li class="nav-item">
         <a href="{{ route('penduduks.index') }}"
            class="nav-link {{ Request::is('penduduks*') ? 'active' : '' }}"><i class="fa fa-users"></i> <p>Data Penduduk</p>

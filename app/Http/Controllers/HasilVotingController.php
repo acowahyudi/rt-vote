@@ -80,7 +80,6 @@ class HasilVotingController extends AppBaseController
                     $q->where('rukun_tetangga_id',$request->rt_id);
                 })
                 ->get();
-
             $kandidat=[];
             foreach ($kandidatAktif as $item){
                 array_push($kandidat,$item->id);
