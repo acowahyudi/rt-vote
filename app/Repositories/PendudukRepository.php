@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Penduduk;
+use App\Models\User;
 use App\Repositories\BaseRepository;
 
 /**
@@ -40,6 +41,6 @@ class PendudukRepository extends BaseRepository
      **/
     public function model()
     {
-        return Penduduk::class;
+        return User::class;
     }
 }

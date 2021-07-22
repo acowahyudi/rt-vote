@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePeriodeRequest;
 use App\Http\Requests\UpdatePeriodeRequest;
+use App\Models\Periode;
 use App\Repositories\PeriodeRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class PeriodeController extends AppBaseController
@@ -29,10 +31,21 @@ class PeriodeController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $periodes = $this->periodeRepository->all();
+        if (Auth::user()->roles_id==1){
+            $periodes = Periode::all();
+        }else{
+            $periodes = Periode::where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id)->get();
+        }
 
         return view('periodes.index')
             ->with('periodes', $periodes);
+    }
+
+    public function periodeByRT(Request $request)
+    {
+        $rt = Periode::where('rukun_tetangga_id', $request->get('id'))
+            ->pluck('keterangan', 'id');
+        return response()->json($rt);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreatePendudukAPIRequest;
 use App\Http\Requests\API\UpdatePendudukAPIRequest;
 use App\Models\Penduduk;
+use App\Models\User;
 use App\Repositories\PendudukRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -35,7 +36,7 @@ class PendudukAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $penduduks = Penduduk::where('nik',$request->nik_email)->orWhere('email',$request->nik_email)->get()->first();
+        $penduduks = User::where('nik',$request->nik_email)->orWhere('email',$request->nik_email)->get()->first();
 
         return $this->sendResponse($penduduks, 'Penduduks retrieved successfully');
     }

@@ -17,7 +17,7 @@
                     <img class="rounded" style="width: 120px" src="{{asset($kandidat->foto)}}">
                 </td>
                 <td style="white-space: nowrap">
-                    <b>Nama :</b> {{ $kandidat->penduduk->nama }}<br>
+                    <b>Nama :</b> {{ $kandidat->user->name }}<br>
                     <b>Periode :</b> {{$kandidat->periode->keterangan}}
                 </td>
 

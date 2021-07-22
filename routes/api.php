@@ -34,3 +34,12 @@ Route::resource('periodes', App\Http\Controllers\API\PeriodeAPIController::class
 Route::resource('kandidats', App\Http\Controllers\API\KandidatAPIController::class);
 
 Route::resource('hasil_votings', App\Http\Controllers\API\HasilVotingAPIController::class);
+
+
+Route::resource('rukun_tetanggas', App\Http\Controllers\API\RukunTetanggaAPIController::class);
+
+Route::resource('kelurahans', App\Http\Controllers\API\KelurahanAPIController::class);
+
+Route::resource('kegiatan_r_ts', App\Http\Controllers\API\KegiatanRTAPIController::class);
+
+Route::resource('roles', App\Http\Controllers\API\RolesAPIController::class);

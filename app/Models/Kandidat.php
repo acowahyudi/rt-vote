@@ -45,7 +45,7 @@ class Kandidat extends Model
 
     public $fillable = [
         'no_calon',
-        'penduduk_id',
+        'users_id',
         'foto',
         'visi',
         'periode_id'
@@ -59,7 +59,7 @@ class Kandidat extends Model
     protected $casts = [
         'id' => 'integer',
         'no_calon' => 'integer',
-        'penduduk_id' => 'integer',
+        'users_id' => 'integer',
         'foto' => 'string',
         'visi' => 'string',
         'periode_id' => 'integer'
@@ -72,7 +72,7 @@ class Kandidat extends Model
      */
     public static $rules = [
         'no_calon' => 'nullable|integer',
-        'penduduk_id' => 'required|integer',
+        'users_id' => 'required|integer',
         'visi' => 'nullable|string',
         'periode_id' => 'required|integer',
         'created_at' => 'nullable',
@@ -91,9 +91,9 @@ class Kandidat extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function penduduk()
+    public function user()
     {
-        return $this->belongsTo(\App\Models\Penduduk::class, 'penduduk_id');
+        return $this->belongsTo(\App\Models\User::class, 'users_id');
     }
 
     /**

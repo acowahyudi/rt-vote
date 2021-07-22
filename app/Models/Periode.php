@@ -38,6 +38,7 @@ class Periode extends Model
     public $fillable = [
         'mulai_vote',
         'selesai_vote',
+        'rukun_tetangga_id',
         'keterangan'
     ];
 
@@ -50,7 +51,8 @@ class Periode extends Model
         'id' => 'integer',
         'mulai_vote' => 'date',
         'selesai_vote' => 'date',
-        'keterangan' => 'string'
+        'keterangan' => 'string',
+        'rukun_tetangga_id' => 'integer'
     ];
 
     /**
@@ -81,5 +83,10 @@ class Periode extends Model
     public function kandidats()
     {
         return $this->hasMany(\App\Models\Kandidat::class, 'periode_id');
+    }
+
+    public function rukunTetangga()
+    {
+        return $this->belongsTo(\App\Models\RukunTetangga::class, 'rukun_tetangga_id');
     }
 }

@@ -29,16 +29,23 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .bg-image{
+            background-image: {{asset('bg-vote.jpg')}};
+        }
+    </style>
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background:url('../bg-vote2.jpg'); background-size: cover">
 <div class="login-box">
-    <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b> Web Admin</a>
+    <!-- /.login-logo -->
+    <div class="text-center m-3">
+        <img width="100px" src="{{asset('logo.png')}}">
     </div>
 
-    <!-- /.login-logo -->
-
+{{--    <div class="login-logo">--}}
+{{--        <a href="{{ url('/home') }}">Web <b>{{ config('app.name') }}</b></a>--}}
+{{--    </div>--}}
     <!-- /.login-box-body -->
     <div class="card">
         <div class="card-body login-card-body">

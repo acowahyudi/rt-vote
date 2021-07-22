@@ -58,6 +58,20 @@
                 </div>
 
                 <div class="input-group mb-3">
+                    <input type="number"
+                           name="nik"
+                           value="{{ old('nik') }}"
+                           class="form-control @error('nik') is-invalid @enderror"
+                           placeholder="NIK">
+                    <div class="input-group-append">
+                        <div class="input-group-text"><span class="fas fa-id-card"></span></div>
+                    </div>
+                    @error('nik')
+                    <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="input-group mb-3">
                     <input type="email"
                            name="email"
                            value="{{ old('email') }}"

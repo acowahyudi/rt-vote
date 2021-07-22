@@ -25,7 +25,7 @@ class HasilVoting extends Model
     use HasFactory;
 
     public $table = 'hasil_voting';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -36,7 +36,7 @@ class HasilVoting extends Model
 
     public $fillable = [
         'periode_id',
-        'penduduk_id',
+        'users_id',
         'kandidat_id'
     ];
 
@@ -48,7 +48,7 @@ class HasilVoting extends Model
     protected $casts = [
         'id' => 'integer',
         'periode_id' => 'integer',
-        'penduduk_id' => 'integer',
+        'users_id' => 'integer',
         'kandidat_id' => 'integer'
     ];
 
@@ -59,7 +59,7 @@ class HasilVoting extends Model
      */
     public static $rules = [
         'periode_id' => 'required|integer',
-        'penduduk_id' => 'required|integer',
+        'users_id' => 'required|integer',
         'kandidat_id' => 'required|integer',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
@@ -77,9 +77,9 @@ class HasilVoting extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function penduduk()
+    public function user()
     {
-        return $this->belongsTo(\App\Models\Penduduk::class, 'penduduk_id');
+        return $this->belongsTo(\App\Models\User::class, 'users_id');
     }
 
     /**

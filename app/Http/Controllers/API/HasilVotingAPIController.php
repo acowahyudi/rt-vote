@@ -7,11 +7,13 @@ use App\Http\Requests\API\UpdateHasilVotingAPIRequest;
 use App\Models\HasilVoting;
 use App\Models\Kandidat;
 use App\Models\Periode;
+use App\Models\User;
 use App\Repositories\HasilVotingRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\HasilVotingResource;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 /**
@@ -38,10 +40,12 @@ class HasilVotingAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $periode = Periode::whereDate('selesai_vote','<',Carbon::now())->latest()->first();
+        $user = User::find($request->penduduk_id);
+        $periode = Periode::where('rukun_tetangga_id',$user->rukun_tetangga_id)
+            ->whereYear('selesai_vote','=',Carbon::now()->format('Y'))->get()->first();
         if (!empty($periode) && $periode!=null)
         {
-            $kandidatAktif = Kandidat::where('periode_id',$periode->id)->with('penduduk','periode')->get()->sortByDesc('vote_count');
+            $kandidatAktif = Kandidat::where('periode_id',$periode->id)->with('user','periode')->get()->sortByDesc('vote_count');
             return $this->sendResponse($kandidatAktif, 'Hasil Voting retrieved successfully');
         }else{
             $today = Carbon::now();

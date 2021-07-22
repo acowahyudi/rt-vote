@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePendudukRequest;
 use App\Http\Requests\UpdatePendudukRequest;
+use App\Models\Kelurahan;
+use App\Models\Roles;
+use App\Models\RukunTetangga;
+use App\Models\User;
 use App\Repositories\PendudukRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Response;
 
 class PendudukController extends AppBaseController
@@ -29,7 +35,14 @@ class PendudukController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $penduduks = $this->pendudukRepository->all();
+        if (Auth::user()->roles_id==1){
+            $penduduks = User::all();
+        }else{
+            $penduduks = User::where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id)
+                ->where('name','not like','%admin%')
+                ->get();
+        }
+
 
         return view('penduduks.index')
             ->with('penduduks', $penduduks);
@@ -42,7 +55,9 @@ class PendudukController extends AppBaseController
      */
     public function create()
     {
-        return view('penduduks.create');
+        $roles = Roles::where('id','!=',1)->pluck('role','id');
+        $kelurahan = Kelurahan::pluck('kelurahan','id');
+        return view('penduduks.create',compact('roles','kelurahan'));
     }
 
     /**
@@ -55,6 +70,8 @@ class PendudukController extends AppBaseController
     public function store(CreatePendudukRequest $request)
     {
         $input = $request->all();
+//        return $input;
+        $input['password'] = Hash::make('1234567890');
 
         $penduduk = $this->pendudukRepository->create($input);
 
@@ -92,6 +109,9 @@ class PendudukController extends AppBaseController
      */
     public function edit($id)
     {
+        $roles = Roles::where('id','!=',1)->pluck('role','id');
+        $kelurahan = Kelurahan::pluck('kelurahan','id');
+
         $penduduk = $this->pendudukRepository->find($id);
 
         if (empty($penduduk)) {
@@ -100,7 +120,7 @@ class PendudukController extends AppBaseController
             return redirect(route('penduduks.index'));
         }
 
-        return view('penduduks.edit')->with('penduduk', $penduduk);
+        return view('penduduks.edit',compact('roles','kelurahan'))->with('penduduk', $penduduk);
     }
 
     /**

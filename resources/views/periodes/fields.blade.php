@@ -35,3 +35,6 @@
     {!! Form::label('keterangan', 'Keterangan:') !!}
     {!! Form::text('keterangan', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
 </div>
+
+<!-- RT id -->
+{!! Form::hidden('rukun_tetangga_id', \Illuminate\Support\Facades\Auth::user()->rukun_tetangga_id, null, ['class' => 'form-control']) !!}

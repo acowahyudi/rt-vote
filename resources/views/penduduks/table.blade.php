@@ -11,7 +11,7 @@
         <tbody>
         @foreach($penduduks as $penduduk)
             <tr>
-                <td>{{ $penduduk->nama }}</td>
+                <td>{{ $penduduk->name }}</td>
                 <td>{{ $penduduk->nik }}</td>
                 <td>{{ $penduduk->email }}</td>
                 <td width="120">

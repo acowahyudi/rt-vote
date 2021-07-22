@@ -6,8 +6,8 @@
 
 <!-- Nama Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('penduduk_id', 'Nama:') !!}
-    {!! Form::select('penduduk_id',$penduduk, null, ['class' => 'form-control']) !!}
+    {!! Form::label('users_id', 'Nama:') !!}
+    {!! Form::select('users_id',$penduduk, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Periode Id Field -->

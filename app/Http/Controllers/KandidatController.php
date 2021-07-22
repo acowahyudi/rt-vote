@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateKandidatRequest;
 use App\Http\Requests\UpdateKandidatRequest;
+use App\Models\Kandidat;
 use App\Models\Penduduk;
 use App\Models\Periode;
 use App\Models\TingkatPendidikan;
+use App\Models\User;
 use App\Repositories\KandidatRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Response;
 
@@ -33,7 +36,13 @@ class KandidatController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $kandidats = $this->kandidatRepository->all();
+        if (Auth::user()->roles_id==1){
+            $kandidats = Kandidat::all();
+        }else{
+            $kandidats = Kandidat::whereHas('user',function ($q){
+                $q->where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id);
+            })->get();
+        }
 
         return view('kandidats.index')
             ->with('kandidats', $kandidats);
@@ -46,7 +55,7 @@ class KandidatController extends AppBaseController
      */
     public function create()
     {
-        $penduduk = Penduduk::pluck('nama','id');
+        $penduduk = User::pluck('name','id');
         $periode = Periode::pluck('keterangan','id');
         return view('kandidats.create',compact('penduduk','periode'));
     }

@@ -18,7 +18,7 @@ class HasilVotingRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'periode_id',
-        'penduduk_id',
+        'users_id',
         'kandidat_id'
     ];
 

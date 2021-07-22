@@ -44,15 +44,15 @@ class KandidatAPIController extends AppBaseController
             ->get()->first();
         if (!empty($periodeAktif)){
             //pengecekan apakah user sudah pernah voting atau belum
-            $voteAktif = HasilVoting::where('penduduk_id',$request->penduduk_id)
+            $voteAktif = HasilVoting::where('users_id',$request->users_id)
                 ->where('periode_id',$periodeAktif->id)->get()->count();
 
             if ($voteAktif>0){
                 return $this->sendError('Anda sudah pernah vote pada pemilihan periode ini',422);
             }else{
                 $kandidats = Kandidat::where('periode_id',$periodeAktif->id)
-                    ->where('penduduk_id','!=',$request->penduduk_id)
-                    ->with('periode','penduduk')->get();
+                    ->where('users_id','!=',$request->users_id)
+                    ->with('periode','user')->get();
                 return $this->sendResponse($kandidats->toArray(), 'Kandidats retrieved successfully');
             }
         }else{
