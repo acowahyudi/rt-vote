@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container pt-3">
+    @include('flash::message')
+
+    <div class="clearfix"></div>
     <div class="card col-md-12">
         <div class="card-body">
             <div class="row">
@@ -9,7 +12,7 @@
                     <h4>Seputar Kegiatan RT</h4>
                 </div>
                 <hr class="col-12">
-                @if(\Illuminate\Support\Facades\Auth::user()->roles_id=3)
+                @if(\Illuminate\Support\Facades\Auth::user()->roles_id=2)
                     @foreach($kegiatan as $item)
                         <div class="col-4">
                             <div class="card bg-dark">
@@ -58,17 +61,17 @@
             <div class="card-body">
                 <h3 class="rounded p-1 mb-3 font-weight-bold text-center">Silahkan Vote Calon Ketua RT </h3>
                 {!! Form::open(['route' => 'hasilVotings.store']) !!}
+                {!! Form::hidden('users_id', \Illuminate\Support\Facades\Auth::user()->id, null, ['class' => 'form-control']) !!}
+                {!! Form::hidden('kandidat_id', $item->id, null, ['class' => 'form-control']) !!}
+                {!! Form::hidden('periode_id', $endVote->id, null, ['class' => 'form-control']) !!}
                 <div class="row justify-content-center container-fluid">
                     @foreach($pilihKandidat as $item)
-                        <div class="col-4">
+                        <div class="col-4 d-flex">
                             <div class="card shadow">
                                 <img src="{{asset($item->foto)}}" class="m-3 rounded rounded-1" alt="Kandidat Image">
-                                <div class="text-center bg-success font-weight-bold p-1">{{$item->user->name}}</div>
-                                <div class="text-center mt-2 font-weight-bold p-1">{{$item->visi}}</div>
-                                {!! Form::hidden('users_id', \Illuminate\Support\Facades\Auth::user()->id, null, ['class' => 'form-control']) !!}
-                                {!! Form::hidden('kandidat_id', $item->id, null, ['class' => 'form-control']) !!}
-                                {!! Form::hidden('periode_id', $endVote->id, null, ['class' => 'form-control']) !!}
-                                {!! Form::submit('Vote', ['class' => 'btn bg-warning text-center font-weight-bold rounded m-3 p-2', 'onclick' => "return confirm('Peringatan, Anda hanya bisa sekali vote. Apakah Anda yakin ingin vote kandidat ini?')"]) !!}
+                                {!! Form::submit('Vote', ['class' => 'align-self-center btn btn-block bg-warning text-center font-weight-bold rounded mt-1 mb-2 p-2', 'onclick' => "return confirm('Peringatan, Anda hanya bisa sekali vote. Apakah Anda yakin ingin vote kandidat ini?')"]) !!}
+                                <div class="text-center bg-primary font-weight-bold p-1"><span class="badge badge-pill badge-light p-2 m-1">0{{$item->no_calon}}</span> {{$item->user->name}}</div>
+                                <div class="text-center mt-2 p-1"><b>Visi: </b>{{$item->visi}}</div>
                             </div>
                         </div>
                     @endforeach

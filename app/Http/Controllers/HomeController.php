@@ -72,6 +72,7 @@ class HomeController extends Controller
                 ->whereDate('mulai_vote','<',Carbon::now())
                 ->whereDate('selesai_vote','>',Carbon::now())
                 ->get()->first();
+
             if (!empty($endVote)){
                 $today = Carbon::now();
                 $remainDay = $endVote->selesai_vote->diffInDays($today);
@@ -85,6 +86,9 @@ class HomeController extends Controller
                         $q->where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id);
                     })
                     ->get();
+            }else{
+                $pilihKandidat = [];
+                $voteAktif = 0;
             }
             return view('home',compact('endVote','pilihKandidat','voteAktif','kegiatan'));
         }

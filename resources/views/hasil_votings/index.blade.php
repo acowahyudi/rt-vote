@@ -40,7 +40,11 @@
                                                     <h5 class="text-white font-weight-bold mb-2"> {{$item->user->name}}</h5>
                                                     <h6 class="text-white">Jumlah Suara : <b>{{$item->vote_count}}</b></h6>
                                                     <div class="progress">
-                                                        <div class="progress-bar <strong>progress-bar-animated</strong> progress-bar-striped bg-primary" role="progressbar" style="width:{{$item->vote_count/$hasilVotings->count()*100}}%" aria-valuenow="{{$item->vote_count}}" aria-valuemin="0" aria-valuemax={{$hasilVotings->count()}}>{{$item->vote_count/$hasilVotings->count()*100}}%</div>
+                                                        @if($hasilVotings->count()>0)
+                                                            <div class="progress-bar <strong>progress-bar-animated</strong> progress-bar-striped bg-primary" role="progressbar" style="width:{{$item->vote_count/$hasilVotings->count()*100}}%" aria-valuenow="{{$item->vote_count}}" aria-valuemin="0" aria-valuemax="{{$hasilVotings->count()}}">{{number_format($item->vote_count/$hasilVotings->count()*100,1,',','.')}}%</div>
+                                                        @else
+                                                            <div class="progress-bar <strong>progress-bar-animated</strong> progress-bar-striped bg-primary" role="progressbar" style="width:0%" aria-valuenow="{{$item->vote_count}}" aria-valuemin="0" aria-valuemax="{{$hasilVotings->count()}}">{{number_format(0,1,',','.')}}%</div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

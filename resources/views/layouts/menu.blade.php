@@ -20,7 +20,13 @@
            class="nav-link {{ Request::is('roles*') ? 'active' : '' }}"><i class="fa fa-user"></i> <p>Role User</p>
         </a>
     </li>
+    <li class="nav-item">
+        <a href="{{ route('penduduks.index') }}"
+           class="nav-link {{ Request::is('penduduks*') ? 'active' : '' }}"><i class="fa fa-users"></i> <p>User Admin RT</p>
+        </a>
+    </li>
 @endif
+
 @if(\Illuminate\Support\Facades\Auth::user()->roles_id==3)
     <li class="nav-item">
         <a href="{{ route('penduduks.index') }}"

@@ -32,7 +32,11 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="text-white font-large-1 mb-2"><i class="fa fa-users"></i> Jumlah Warga</h4>
-                                <h5 class="text-white">{{$penduduk->count()}}</h5>
+                                @if(!empty($penduduk))
+                                    <h5 class="text-white">{{$penduduk->count()}}</h5>
+                                @else
+                                    <h5 class="text-white">0</h5>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -42,7 +46,11 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="text-white font-large-1 mb-2"><i class="fa fa-address-book"></i> Calon Ketua RT</h4>
-                                <h5 class="text-white">{{$kandidat->count()}}</h5>
+                                @if(!empty($kandidat))
+                                    <h5 class="text-white">{{$kandidat->count()}}</h5>
+                                @else
+                                    <h5 class="text-white">0</h5>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -52,7 +60,11 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="text-white font-large-1 mb-2"><i class="fa fa-chart-bar"></i> Jumlah Voting</h4>
-                                <h5 class="text-white">{{$voting->count()}}</h5>
+                                @if(!empty($voting))
+                                    <h5 class="text-white">{{$voting->count()}}</h5>
+                                @else
+                                    <h5 class="text-white">0</h5>
+                                @endif
                             </div>
                         </div>
                     </div>

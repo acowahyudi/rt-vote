@@ -118,9 +118,9 @@ class HasilVotingController extends AppBaseController
         $input = $request->all();
         $hasilVoting = $this->hasilVotingRepository->create($input);
 
-        Flash::success('Hasil Voting saved successfully.');
+        Flash::success('Berhasil Voting.');
 
-        return redirect(route('hasilVotings.index'));
+        return redirect(route('home'));
     }
 
     /**

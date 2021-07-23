@@ -55,8 +55,8 @@ class KandidatController extends AppBaseController
      */
     public function create()
     {
-        $penduduk = User::pluck('name','id');
-        $periode = Periode::pluck('keterangan','id');
+        $penduduk = User::where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id)->where('roles_id',2)->pluck('name','id');
+        $periode = Periode::where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id)->pluck('keterangan','id');
         return view('kandidats.create',compact('penduduk','periode'));
     }
 
@@ -120,8 +120,8 @@ class KandidatController extends AppBaseController
      */
     public function edit($id)
     {
-        $penduduk = Penduduk::pluck('nama','id');
-        $periode = Periode::pluck('keterangan','id');
+        $penduduk = User::where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id)->where('roles_id',2)->pluck('name','id');
+        $periode = Periode::where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id)->pluck('keterangan','id');
         $kandidat = $this->kandidatRepository->find($id);
 
         if (empty($kandidat)) {

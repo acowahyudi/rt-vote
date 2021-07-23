@@ -36,10 +36,10 @@ class PendudukController extends AppBaseController
     public function index(Request $request)
     {
         if (Auth::user()->roles_id==1){
-            $penduduks = User::all();
+            $penduduks = User::where('roles_id',3)->get();
         }else{
             $penduduks = User::where('rukun_tetangga_id',Auth::user()->rukun_tetangga_id)
-                ->where('name','not like','%admin%')
+                ->where('roles_id',2)
                 ->get();
         }
 
@@ -55,8 +55,14 @@ class PendudukController extends AppBaseController
      */
     public function create()
     {
-        $roles = Roles::where('id','!=',1)->pluck('role','id');
-        $kelurahan = Kelurahan::pluck('kelurahan','id');
+        $roles = Roles::where('id',3)->pluck('role','id');
+        if (Auth::user()->roles_id==3){
+            $kelurahan = Kelurahan::whereHas('rukunTetanggas',function ($q){
+                $q->where('id',Auth::user()->rukun_tetangga_id);
+            })->pluck('kelurahan','id');
+        }else{
+            $kelurahan = Kelurahan::pluck('kelurahan','id');
+        }
         return view('penduduks.create',compact('roles','kelurahan'));
     }
 
@@ -172,5 +178,21 @@ class PendudukController extends AppBaseController
         Flash::success('Penduduk deleted successfully.');
 
         return redirect(route('penduduks.index'));
+    }
+
+    public function changePassword()
+    {
+        return view('auth.change_password');
+    }
+
+    public function storePassword(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $user->update([
+            'password'=> Hash::make($request->password)
+        ]);
+        $user->save();
+        Flash::success('Password berhasil dirubah.');
+        return redirect(route('home'));
     }
 }
