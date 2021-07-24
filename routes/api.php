@@ -27,7 +27,7 @@ Route::group(['middleware' => 'api'], function ($router) {
 
 });
 
-Route::resource('penduduks', App\Http\Controllers\API\PendudukAPIController::class);
+Route::resource('users', App\Http\Controllers\API\PendudukAPIController::class);
 
 Route::resource('periodes', App\Http\Controllers\API\PeriodeAPIController::class);
 

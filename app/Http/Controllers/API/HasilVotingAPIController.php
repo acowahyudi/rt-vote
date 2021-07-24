@@ -40,7 +40,7 @@ class HasilVotingAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $user = User::find($request->penduduk_id);
+        $user = User::find($request->users_id);
         $periode = Periode::where('rukun_tetangga_id',$user->rukun_tetangga_id)
             ->whereYear('selesai_vote','=',Carbon::now()->format('Y'))->get()->first();
         if (!empty($periode) && $periode!=null)
