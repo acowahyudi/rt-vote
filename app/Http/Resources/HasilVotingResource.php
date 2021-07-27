@@ -17,7 +17,7 @@ class HasilVotingResource extends JsonResource
         return [
             'id' => $this->id,
             'periode_id' => $this->periode_id,
-            'penduduk_id' => $this->penduduk_id,
+            'users_id' => $this->users_id,
             'kandidat_id' => $this->kandidat_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

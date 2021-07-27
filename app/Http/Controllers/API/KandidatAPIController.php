@@ -7,6 +7,7 @@ use App\Http\Requests\API\UpdateKandidatAPIRequest;
 use App\Models\HasilVoting;
 use App\Models\Kandidat;
 use App\Models\Periode;
+use App\Models\User;
 use App\Repositories\KandidatRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,10 +39,12 @@ class KandidatAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $periodeAktif = Periode::whereDate('mulai_vote','<',Carbon::now())
-            ->orWhereDate('selesai_vote','>',Carbon::now())
-            ->whereYear('mulai_vote','<',Carbon::today()->year)
+        $user = User::find($request->users_id);
+        $periodeAktif = Periode::where('rukun_tetangga_id',$user->rukun_tetangga_id)
+            ->whereDate('mulai_vote','<',Carbon::now())
+            ->whereDate('selesai_vote','>',Carbon::now())
             ->get()->first();
+
         if (!empty($periodeAktif)){
             //pengecekan apakah user sudah pernah voting atau belum
             $voteAktif = HasilVoting::where('users_id',$request->users_id)
