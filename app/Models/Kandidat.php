@@ -113,7 +113,11 @@ class Kandidat extends Model
     {
         $nilai = $this->hasilVotings()->count();
         $allVote = HasilVoting::where('periode_id',$this->periode_id)->get()->count();
-        $presentasi = number_format((($nilai*100)/$allVote),2);
+        if($allVote>0){
+            $presentasi = number_format((($nilai*100)/$allVote),2);
+        }else{
+            $presentasi = 0;
+        }
         return $presentasi;
     }
 }

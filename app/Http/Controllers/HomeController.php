@@ -92,6 +92,7 @@ class HomeController extends Controller
             }
             return view('home',compact('endVote','pilihKandidat','voteAktif','kegiatan'));
         }
+        //TODO home untuk superadmin
         elseif (Auth::user()->roles_id==1){
             $kegiatan = KegiatanRT::all();
             $endVote = Periode::whereDate('mulai_vote','<',Carbon::now()) ->whereDate('selesai_vote','>',Carbon::now())->get()->first();
@@ -102,7 +103,7 @@ class HomeController extends Controller
             }
             $rt = RukunTetangga::all();
             $kandidat = Kandidat::all();
-            $penduduk = User::where('name','!=','admin')->get();
+            $penduduk = User::where('roles_id',2)->get();
             return view('homeAdmin',compact('rt','penduduk','kandidat','endVote','kegiatan'));
         }
     }

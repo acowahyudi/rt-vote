@@ -61,11 +61,11 @@
             <div class="card-body">
                 <h3 class="rounded p-1 mb-3 font-weight-bold text-center">Silahkan Vote Calon Ketua RT </h3>
                 {!! Form::open(['route' => 'hasilVotings.store']) !!}
-                {!! Form::hidden('users_id', \Illuminate\Support\Facades\Auth::user()->id, null, ['class' => 'form-control']) !!}
-                {!! Form::hidden('kandidat_id', $item->id, null, ['class' => 'form-control']) !!}
-                {!! Form::hidden('periode_id', $endVote->id, null, ['class' => 'form-control']) !!}
                 <div class="row justify-content-center container-fluid">
                     @foreach($pilihKandidat as $item)
+                        {!! Form::hidden('users_id', \Illuminate\Support\Facades\Auth::user()->id, null, ['class' => 'form-control']) !!}
+                        {!! Form::hidden('kandidat_id', $item->id, null, ['class' => 'form-control']) !!}
+                        {!! Form::hidden('periode_id', $endVote->id, null, ['class' => 'form-control']) !!}
                         <div class="col-4 d-flex">
                             <div class="card shadow">
                                 <img src="{{asset($item->foto)}}" class="m-3 rounded rounded-1" alt="Kandidat Image">

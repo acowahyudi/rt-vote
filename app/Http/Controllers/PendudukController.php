@@ -42,8 +42,6 @@ class PendudukController extends AppBaseController
                 ->where('roles_id',2)
                 ->get();
         }
-
-
         return view('penduduks.index')
             ->with('penduduks', $penduduks);
     }
