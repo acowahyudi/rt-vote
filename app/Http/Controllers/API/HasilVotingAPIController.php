@@ -45,7 +45,7 @@ class HasilVotingAPIController extends AppBaseController
             ->whereYear('selesai_vote','=',Carbon::now()->format('Y'))->get()->first();
         if (!empty($periode) && $periode!=null)
         {
-            $kandidatAktif = Kandidat::where('periode_id',$periode->id)->with('user','periode')->get()->sortByDesc('vote_count');
+            $kandidatAktif = Kandidat::where('periode_id',$periode->id)->with('user','periode')->get();
             return $this->sendResponse($kandidatAktif, 'Hasil Voting retrieved successfully');
         }else{
             $today = Carbon::now();
