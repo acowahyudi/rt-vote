@@ -1,7 +1,7 @@
 <!-- Nama Field -->
 <div class="col-sm-12">
     {!! Form::label('nama', 'Nama:') !!}
-    <p>{{ $penduduk->nama }}</p>
+    <p>{{ $penduduk->name }}</p>
 </div>
 
 <!-- Nik Field -->
