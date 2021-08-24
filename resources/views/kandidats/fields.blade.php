@@ -1,3 +1,4 @@
+
 <!-- No Calon Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('no_calon', 'No Calon:') !!}
@@ -7,8 +8,15 @@
 <!-- Nama Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('users_id', 'Nama:') !!}
-    {!! Form::select('users_id',$penduduk, null, ['class' => 'form-control']) !!}
+    {!! Form::select('users_id',$penduduk, null, ['class' => 'form-control', 'id'=>'users_id']) !!}
 </div>
+@push('page_scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#users_id').select2();
+        });
+    </script>
+@endpush
 
 <!-- Periode Id Field -->
 <div class="form-group col-sm-6">
@@ -18,7 +26,7 @@
 
 <!-- Foto Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('foto', 'Foto:') !!}
+    {!! Form::label('foto', 'Foto:') !!}<br>
     {!! Form::file('foto', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
@@ -27,4 +35,3 @@
     {!! Form::label('visi', 'Visi:') !!}
     {!! Form::textarea('visi', null, ['class' => 'form-control']) !!}
 </div>
-

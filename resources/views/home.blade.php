@@ -8,28 +8,28 @@
     <div class="card col-md-12">
         <div class="card-body">
             <div class="row">
-                <div class="col-12">
-                    <h4>Seputar Kegiatan RT</h4>
-                </div>
-                <hr class="col-12">
-                @if(\Illuminate\Support\Facades\Auth::user()->roles_id=2)
-                    @foreach($kegiatan as $item)
-                        <div class="col-4">
-                            <div class="card bg-dark">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <img style="width: 300px; height: 200px" src="{{asset($item->foto)}}">
-                                        <h6 class="text-white">{{$item->title}}</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-                <div class="col-12 text-right">
-                    <a href="{{route('kegiatanRTs.index')}}" class="badge bg-light small text-black-50">lihat semua <i class="fa fa-angle-double-right"></i></a>
-                </div>
-                <hr class="col-12">
+{{--                <div class="col-12">--}}
+{{--                    <h4>Seputar Kegiatan RT</h4>--}}
+{{--                </div>--}}
+{{--                <hr class="col-12">--}}
+{{--                @if(\Illuminate\Support\Facades\Auth::user()->roles_id=2)--}}
+{{--                    @foreach($kegiatan as $item)--}}
+{{--                        <div class="col-4">--}}
+{{--                            <div class="card bg-dark">--}}
+{{--                                <div class="card-content">--}}
+{{--                                    <div class="card-body">--}}
+{{--                                        <img style="width: 300px; height: 200px" src="{{asset($item->foto)}}">--}}
+{{--                                        <h6 class="text-white">{{$item->title}}</h6>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
+{{--                @endif--}}
+{{--                <div class="col-12 text-right">--}}
+{{--                    <a href="{{route('kegiatanRTs.index')}}" class="badge bg-light small text-black-50">lihat semua <i class="fa fa-angle-double-right"></i></a>--}}
+{{--                </div>--}}
+{{--                <hr class="col-12">--}}
 
                 <div class="col-12">
                     @if(!empty($endVote))
