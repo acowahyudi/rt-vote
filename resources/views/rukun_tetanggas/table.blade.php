@@ -11,7 +11,7 @@
         @foreach($rukunTetanggas as $rukunTetangga)
             <tr>
                 <td>{{ $rukunTetangga->rt }}</td>
-            <td>{{ $rukunTetangga->kelurahan->kelurahan }}</td>
+            <td>{{ $rukunTetangga['kelurahan']['kelurahan'] }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['rukunTetanggas.destroy', $rukunTetangga->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
